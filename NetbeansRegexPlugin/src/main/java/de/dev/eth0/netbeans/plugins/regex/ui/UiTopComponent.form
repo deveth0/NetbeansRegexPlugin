@@ -151,11 +151,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="regularExpressionTextField">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.regularExpressionTextField.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
-                    </Property>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
@@ -165,11 +160,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="replacementTextField">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.replacementTextField.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
-                    </Property>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
@@ -203,15 +193,11 @@
                     <Component class="javax.swing.JTextArea" name="hintTextArea">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                        </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
-                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -363,15 +349,11 @@
                     <Component class="javax.swing.JTextArea" name="groupsTextArea">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                        </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
-                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                   </SubComponents>

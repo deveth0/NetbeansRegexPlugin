@@ -19,18 +19,21 @@
  */
 package de.dev.eth0.netbeans.plugins.regex.ui;
 
-import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator;
-import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator.MatcherGroup;
 import java.awt.Color;
 import java.util.regex.Pattern;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
+
+import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator;
+import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator.MatcherGroup;
 
 /**
  * Top component which displays something.
@@ -60,6 +63,8 @@ import org.openide.windows.TopComponent;
 })
 public final class UiTopComponent extends TopComponent {
 
+  private final  Color TXF_DEFAULT;
+  private final Color TXF_ERROR;
   private final RegexEvaluator evaluator;
 
   public UiTopComponent() {
@@ -67,6 +72,8 @@ public final class UiTopComponent extends TopComponent {
     setName(Bundle.CTL_UiTopComponent());
     setToolTipText(Bundle.HINT_UiTopComponent());
     evaluator = new RegexEvaluator();
+    TXF_DEFAULT=regularExpressionTextField.getForeground();
+    TXF_ERROR=Color.red;
   }
 
   /**
@@ -126,11 +133,7 @@ public final class UiTopComponent extends TopComponent {
 
     org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.jLabel1.text")); // NOI18N
 
-    regularExpressionTextField.setText(org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.regularExpressionTextField.text")); // NOI18N
-
     org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.jLabel2.text")); // NOI18N
-
-    replacementTextField.setText(org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.replacementTextField.text")); // NOI18N
 
     org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.jLabel5.text")); // NOI18N
 
@@ -139,11 +142,9 @@ public final class UiTopComponent extends TopComponent {
     jScrollPane1.setViewportView(input1TextArea);
 
     hintTextArea.setEditable(false);
-    hintTextArea.setBackground(new java.awt.Color(240, 240, 240));
     hintTextArea.setColumns(20);
     hintTextArea.setRows(5);
     hintTextArea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-    hintTextArea.setEnabled(false);
     jScrollPane3.setViewportView(hintTextArea);
 
     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -206,11 +207,9 @@ public final class UiTopComponent extends TopComponent {
     org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.jLabel11.text")); // NOI18N
 
     groupsTextArea.setEditable(false);
-    groupsTextArea.setBackground(new java.awt.Color(240, 240, 240));
     groupsTextArea.setColumns(20);
     groupsTextArea.setRows(5);
     groupsTextArea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-    groupsTextArea.setEnabled(false);
     jScrollPane2.setViewportView(groupsTextArea);
 
     jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -553,11 +552,11 @@ public final class UiTopComponent extends TopComponent {
     evaluator.update(regex, getFlags(), replacement, input);
 
     if (evaluator.valid) {
-      regularExpressionTextField.setForeground(Color.black);
+      regularExpressionTextField.setForeground(TXF_DEFAULT);
       hintTextArea.setText("");
     }
     else {
-      regularExpressionTextField.setForeground(Color.red);
+      regularExpressionTextField.setForeground(TXF_ERROR);
       hintTextArea.setText(evaluator.invalidReason);
     }
     matchesLabel.setText(NbBundle.getMessage(UiTopComponent.class, evaluator.matches ? "UiTopComponent.true" : "UiTopComponent.false"));
