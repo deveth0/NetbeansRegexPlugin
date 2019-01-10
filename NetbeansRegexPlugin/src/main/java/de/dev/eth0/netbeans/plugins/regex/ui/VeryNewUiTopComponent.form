@@ -112,8 +112,8 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lRegex" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbRegex" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbRegex" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bSave" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="lStatusRegex" min="-2" max="-2" attributes="0"/>
@@ -166,8 +166,11 @@
             </Component>
             <Component class="javax.swing.JButton" name="bSave">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.bSave.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.SAVE,javax.swing.UIManager.getColor(&quot;Button.foreground&quot;))" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.bSave.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[2, 2, 2, 2]"/>

@@ -220,7 +220,8 @@ public final class VeryNewUiTopComponent extends TopComponent {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(bSave, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.bSave.text")); // NOI18N
+        bSave.setIcon(org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.SAVE,javax.swing.UIManager.getColor("Button.foreground")));
+        bSave.setToolTipText(org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.bSave.toolTipText")); // NOI18N
         bSave.setMargin(new java.awt.Insets(2, 2, 2, 2));
         bSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +285,8 @@ public final class VeryNewUiTopComponent extends TopComponent {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        pMatchLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bSave, cbRegex});
 
         splitter.setLeftComponent(pMatch);
 
