@@ -139,14 +139,14 @@
             <Component class="javax.swing.JLabel" name="lGroups">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lGroups.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lGroups.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lRegex">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lRegex.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lRegex.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
@@ -170,7 +170,7 @@
                   <Connection code="org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.SAVE,javax.swing.UIManager.getColor(&quot;Button.foreground&quot;))" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.bSave.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.bSave.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[2, 2, 2, 2]"/>
@@ -188,14 +188,14 @@
                   </FontInfo>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lStatusRegex.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lStatusRegex.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lText">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lText.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lText.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
@@ -295,7 +295,7 @@
             <Component class="javax.swing.JLabel" name="lReplace">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lReplace.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lReplace.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
@@ -304,7 +304,7 @@
             <Component class="javax.swing.JLabel" name="lReplaced">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lReplaced.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lReplaced.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
@@ -332,7 +332,7 @@
                   </FontInfo>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="VeryNewUiTopComponent.lStatusReplex.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/dev/eth0/netbeans/plugins/regex/ui/Bundle.properties" key="UiTopComponent.lStatusReplex.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>

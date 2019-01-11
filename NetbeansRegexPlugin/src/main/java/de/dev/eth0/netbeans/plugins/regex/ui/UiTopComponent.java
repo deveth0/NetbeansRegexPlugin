@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2016 dev-eth0.de
+ * Copyright (C) 2018 Alessandro Falappa
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.dev.eth0.netbeans.plugins.regex.ui;
 
 import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator;
@@ -23,34 +39,37 @@ import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 /**
- * Top component which displays something.
+ * Top component for testing regular expressions.
+ *
+ * @author deveth0
+ * @author Alessandro Falappa
  */
 @ConvertAsProperties(
-        dtd = "-//de.dev.eth0.netbeans.plugins.regex.ui//VeryNewUi//EN",
+        dtd = "-//de.dev.eth0.netbeans.plugins.regex.ui//Ui//EN",
         autostore = false
 )
 @TopComponent.Description(
-        preferredID = "VeryNewUiTopComponent",
+        preferredID = "UiTopComponent",
         //iconBase="SET/PATH/TO/ICON/HERE",
         persistenceType = TopComponent.PERSISTENCE_ALWAYS
 )
 @TopComponent.Registration(mode = "output", openAtStartup = false)
-@ActionID(category = "Window", id = "de.dev.eth0.netbeans.plugins.regex.ui.VeryNewUiTopComponent")
-@ActionReference(path = "Menu/Window", position = 1277)
+@ActionID(category = "Window", id = "de.dev.eth0.netbeans.plugins.regex.ui.UiTopComponent")
+@ActionReference(path = "Menu/Window", position = 1275)
 @TopComponent.OpenActionRegistration(
-        displayName = "#CTL_VeryNewUiAction",
-        preferredID = "VeryNewUiTopComponent"
+        displayName = "#CTL_UiAction",
+        preferredID = "UiTopComponent"
 )
 @Messages({
-    "CTL_VeryNewUiAction=VeryNewUi",
-    "CTL_VeryNewUiTopComponent=VeryNewUi"
+    "CTL_UiAction=Regex Tester",
+    "CTL_UiTopComponent=Regex Tester"
 })
-public final class VeryNewUiTopComponent extends TopComponent {
+public final class UiTopComponent extends TopComponent {
 
     private static final String TXT_REGEX_VALID = "Regular expression is valid.";
     private static final String TXT_REPLEX_VALID = "Replacement expression is valid.";
-    private static final String TXT_NO_REGEX = org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lStatusRegex.text"); // NOI18N;
-    private static final String TXT_NO_REPLACEMENT = org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lStatusReplex.text"); // NOI18N;
+    private static final String TXT_NO_REGEX = org.openide.util.NbBundle.getMessage(UiTopComponent.class, "VeryNewUiTopComponent.lStatusRegex.text"); // NOI18N;
+    private static final String TXT_NO_REPLACEMENT = org.openide.util.NbBundle.getMessage(UiTopComponent.class, "VeryNewUiTopComponent.lStatusReplex.text"); // NOI18N;
     private static final Style STY_NORMAL = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
     private static final int THROTTLE_DELAY = 300;
     private static final String PROPKEY_HIST_SIZE = "regex.history.size";
@@ -108,7 +127,7 @@ public final class VeryNewUiTopComponent extends TopComponent {
         }
     };
 
-    public VeryNewUiTopComponent() {
+    public UiTopComponent() {
         initComponents();
         setName(Bundle.CTL_VeryNewUiTopComponent());
         COL_NORMAL = lStatusRegex.getForeground();
@@ -184,9 +203,9 @@ public final class VeryNewUiTopComponent extends TopComponent {
         splitter.setContinuousLayout(true);
         splitter.setOneTouchExpandable(true);
 
-        org.openide.awt.Mnemonics.setLocalizedText(lGroups, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lGroups.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lGroups, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lGroups.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(lRegex, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lRegex.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lRegex, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lRegex.text")); // NOI18N
 
         cbRegex.setEditable(true);
         cbRegex.setModel(dcbmRegExs);
@@ -197,7 +216,7 @@ public final class VeryNewUiTopComponent extends TopComponent {
         });
 
         bSave.setIcon(org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.SAVE,javax.swing.UIManager.getColor("Button.foreground")));
-        bSave.setToolTipText(org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.bSave.toolTipText")); // NOI18N
+        bSave.setToolTipText(org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.bSave.toolTipText")); // NOI18N
         bSave.setMargin(new java.awt.Insets(2, 2, 2, 2));
         bSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,9 +225,9 @@ public final class VeryNewUiTopComponent extends TopComponent {
         });
 
         lStatusRegex.setFont(lStatusRegex.getFont().deriveFont(lStatusRegex.getFont().getSize()-2f));
-        org.openide.awt.Mnemonics.setLocalizedText(lStatusRegex, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lStatusRegex.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lStatusRegex, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lStatusRegex.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(lText, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lText.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lText, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lText.text")); // NOI18N
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 60));
 
@@ -266,9 +285,9 @@ public final class VeryNewUiTopComponent extends TopComponent {
 
         splitter.setLeftComponent(pMatch);
 
-        org.openide.awt.Mnemonics.setLocalizedText(lReplace, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lReplace.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lReplace, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lReplace.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(lReplaced, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lReplaced.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lReplaced, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lReplaced.text")); // NOI18N
 
         taReplaced.setEditable(false);
         taReplaced.setColumns(10);
@@ -276,7 +295,7 @@ public final class VeryNewUiTopComponent extends TopComponent {
         jScrollPane3.setViewportView(taReplaced);
 
         lStatusReplex.setFont(lStatusReplex.getFont().deriveFont(lStatusReplex.getFont().getSize()-2f));
-        org.openide.awt.Mnemonics.setLocalizedText(lStatusReplex, org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lStatusReplex.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(lStatusReplex, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lStatusReplex.text")); // NOI18N
 
         javax.swing.GroupLayout pReplaceLayout = new javax.swing.GroupLayout(pReplace);
         pReplace.setLayout(pReplaceLayout);
