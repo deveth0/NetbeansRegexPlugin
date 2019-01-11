@@ -53,6 +53,10 @@ public final class VeryNewUiTopComponent extends TopComponent {
     private static final String TXT_NO_REPLACEMENT = org.openide.util.NbBundle.getMessage(VeryNewUiTopComponent.class, "VeryNewUiTopComponent.lStatusReplex.text"); // NOI18N;
     private static final Style STY_NORMAL = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
     private static final int THROTTLE_DELAY = 300;
+    private static final String PROPKEY_HIST_SIZE = "regex.history.size";
+    private static final String PROPKEY_HIST_PREFIX = "regex.history.";
+    private static final String PROPKEY_TEXT = "regex.sample.text";
+    private static final String PROPKEY_REPL_EXP = "regex.replace.expression";
     private final Color COL_NORMAL;
     private final Color COL_SUCCESS;
     private final Color COL_ERROR;
@@ -358,6 +362,9 @@ public final class VeryNewUiTopComponent extends TopComponent {
     public void componentOpened() {
         throttleUpdates.setRepeats(false);
         throttleUpdateHighlight.setRepeats(false);
+        // trigger an initial update (useful if state read from properties)
+        updateRegexp();
+        updateHighlight();
         // listen to regex edits
         JTextField tf = (JTextField) cbRegex.getEditor().getEditorComponent();
         tf.getDocument().addDocumentListener(dlUpdateHiglight);
@@ -372,13 +379,30 @@ public final class VeryNewUiTopComponent extends TopComponent {
     }
 
     void writeProperties(java.util.Properties p) {
-        // better to version settings since initial version as advocated at
-        // http://wiki.apidesign.org/wiki/PropertyFiles
-        p.setProperty("version", "1.0");
+        p.setProperty(PROPKEY_TEXT, tpText.getText());
+        p.setProperty(PROPKEY_REPL_EXP, txReplace.getText());
+        p.setProperty(PROPKEY_HIST_SIZE, String.valueOf(dcbmRegExs.getSize()));
+        for (int i = 0; i < dcbmRegExs.getSize(); i++) {
+            String regex = dcbmRegExs.getElementAt(i);
+            p.setProperty(genHistKey(i), regex);
+        }
+    }
+
+    private String genHistKey(int i) {
+        return String.format("%s%d", PROPKEY_HIST_PREFIX, i);
     }
 
     void readProperties(java.util.Properties p) {
-        String version = p.getProperty("version");
+        tpText.setText(p.getProperty(PROPKEY_TEXT, ""));
+        txReplace.setText(p.getProperty(PROPKEY_REPL_EXP, ""));
+        dcbmRegExs.removeAllElements();
+        int histSize = Integer.parseInt(p.getProperty(PROPKEY_HIST_SIZE, "0"));
+        for (int i = 0; i < histSize; i++) {
+            final String key = genHistKey(i);
+            if (p.containsKey(key)) {
+                dcbmRegExs.addElement(p.getProperty(key));
+            }
+        }
     }
 
     private void updateHighlight() {
