@@ -17,9 +17,11 @@
 package de.dev.eth0.netbeans.plugins.regex.ui;
 
 import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator;
+import de.dev.eth0.netbeans.plugins.regex.prefs.PrefConstants;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -36,6 +38,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.openide.util.NbPreferences;
 import org.openide.windows.TopComponent;
 
 /**
@@ -68,8 +71,8 @@ public final class UiTopComponent extends TopComponent {
 
     private static final String TXT_REGEX_VALID = "Regular expression is valid.";
     private static final String TXT_REPLEX_VALID = "Replacement expression is valid.";
-    private static final String TXT_NO_REGEX = org.openide.util.NbBundle.getMessage(UiTopComponent.class, "VeryNewUiTopComponent.lStatusRegex.text"); // NOI18N;
-    private static final String TXT_NO_REPLACEMENT = org.openide.util.NbBundle.getMessage(UiTopComponent.class, "VeryNewUiTopComponent.lStatusReplex.text"); // NOI18N;
+    private static final String TXT_NO_REGEX = org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lStatusRegex.text"); // NOI18N;
+    private static final String TXT_NO_REPLACEMENT = org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.lStatusReplex.text"); // NOI18N;
     private static final Style STY_NORMAL = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
     private static final int THROTTLE_DELAY = 300;
     private static final String PROPKEY_HIST_SIZE = "regex.history.size";
@@ -554,13 +557,14 @@ public final class UiTopComponent extends TopComponent {
     }
 
     private void addStyles(JTextPane tpText) {
-        StyleConstants.setBackground(tpText.addStyle("grp0", null), new Color(204, 255, 255));
-        StyleConstants.setBackground(tpText.addStyle("grp1", null), new Color(255, 204, 255));
-        StyleConstants.setBackground(tpText.addStyle("grp2", null), new Color(255, 255, 204));
-        StyleConstants.setBackground(tpText.addStyle("grp3", null), new Color(255, 204, 204));
-        StyleConstants.setBackground(tpText.addStyle("grp4", null), new Color(204, 255, 204));
-        StyleConstants.setBackground(tpText.addStyle("grp5", null), new Color(204, 204, 255));
-        StyleConstants.setBackground(tpText.addStyle("grp6", null), new Color(204, 204, 204));
+        final Preferences prefs = NbPreferences.forModule(PrefConstants.class);
+        StyleConstants.setBackground(tpText.addStyle("grp0", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_0, PrefConstants.DEFAULT_COLOR_0)));
+        StyleConstants.setBackground(tpText.addStyle("grp1", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_1, PrefConstants.DEFAULT_COLOR_1)));
+        StyleConstants.setBackground(tpText.addStyle("grp2", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_2, PrefConstants.DEFAULT_COLOR_2)));
+        StyleConstants.setBackground(tpText.addStyle("grp3", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_3, PrefConstants.DEFAULT_COLOR_3)));
+        StyleConstants.setBackground(tpText.addStyle("grp4", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_4, PrefConstants.DEFAULT_COLOR_4)));
+        StyleConstants.setBackground(tpText.addStyle("grp5", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_5, PrefConstants.DEFAULT_COLOR_5)));
+        StyleConstants.setBackground(tpText.addStyle("grp6", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_6, PrefConstants.DEFAULT_COLOR_6)));
     }
 
     private String firstLine(String str) {

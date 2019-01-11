@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 dev-eth0.de
- * Copyright (C) 2018 Alessandro Falappa
+ * Modifications copyright (C) 2018 Alessandro Falappa.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
