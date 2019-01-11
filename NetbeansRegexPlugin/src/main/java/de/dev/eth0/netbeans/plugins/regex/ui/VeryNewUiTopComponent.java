@@ -87,34 +87,6 @@ public final class VeryNewUiTopComponent extends TopComponent {
             throttleUpdates.restart();
         }
     };
-    private final DocumentListener dlPrinter = new DocumentListener() {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            processEvent(e);
-        }
-
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            processEvent(e);
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-            processEvent(e);
-        }
-
-        void processEvent(DocumentEvent e) {
-            System.out.print(e.getDocument().toString());
-            if (e.getType().equals(DocumentEvent.EventType.INSERT)) {
-                try {
-                    System.out.format(" INSERT: %s%n", e.getDocument().getText(e.getOffset(), e.getLength()));
-                } catch (BadLocationException ex) {
-                }
-            } else {
-                System.out.format(" %s%n", e.getType());
-            }
-        }
-    };
     private final DocumentListener dlUpdateHiglight = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
@@ -346,7 +318,6 @@ public final class VeryNewUiTopComponent extends TopComponent {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         Object regex = cbRegex.getSelectedItem();
         if (regex != null) {
-            System.out.format("Adding to history: %s%n", regex);
             dcbmRegExs.insertElementAt(regex.toString(), 0);
         }
     }//GEN-LAST:event_bSaveActionPerformed
@@ -389,13 +360,10 @@ public final class VeryNewUiTopComponent extends TopComponent {
         throttleUpdateHighlight.setRepeats(false);
         // listen to regex edits
         JTextField tf = (JTextField) cbRegex.getEditor().getEditorComponent();
-        tf.getDocument().addDocumentListener(dlPrinter);
         tf.getDocument().addDocumentListener(dlUpdateHiglight);
         // listen to sample text edits
-        tpText.getDocument().addDocumentListener(dlPrinter);
         tpText.getDocument().addDocumentListener(dlUpdate);
         // listen to replex edits
-        txReplace.getDocument().addDocumentListener(dlPrinter);
         txReplace.getDocument().addDocumentListener(dlUpdate);
     }
 
@@ -414,7 +382,6 @@ public final class VeryNewUiTopComponent extends TopComponent {
     }
 
     private void updateHighlight() {
-        System.out.println("de.dev.eth0.netbeans.plugins.regex.ui.VeryNewUiTopComponent.updateHighlight()");
         StyledDocument txtDoc = (StyledDocument) tpText.getDocument();
         txtDoc.removeDocumentListener(dlUpdate);
         txtDoc.setCharacterAttributes(0, txtDoc.getLength(), STY_NORMAL, true);
@@ -434,7 +401,6 @@ public final class VeryNewUiTopComponent extends TopComponent {
     }
 
     private void updateRegexp() {
-        System.out.println("de.dev.eth0.netbeans.plugins.regex.ui.VeryNewUiTopComponent.updateRegexp()");
         JTextField tf = (JTextField) cbRegex.getEditor().getEditorComponent();
         String regex = tf.getText();
         String replacement = txReplace.getText();
