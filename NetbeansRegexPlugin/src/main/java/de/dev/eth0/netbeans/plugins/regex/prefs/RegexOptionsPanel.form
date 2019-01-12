@@ -17,43 +17,39 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lCol0" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <Component id="lHeading" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lCol2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCol3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCol1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ccbCol1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ccbCol2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ccbCol3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lCol4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCol5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCol6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ccbCol4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ccbCol5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ccbCol6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="ccbCol0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lCol1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lCol0" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ccbCol0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="lHeading" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="ccbCol1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lCol2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ccbCol2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lCol3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ccbCol3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lCol4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ccbCol4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lCol5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ccbCol5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lCol6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ccbCol6" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -64,30 +60,27 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lHeading" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lCol0" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lHeading" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ccbCol0" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lCol0" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lCol1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ccbCol1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lCol4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ccbCol4" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lCol2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ccbCol2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lCol5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ccbCol5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lCol3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ccbCol3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lCol3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ccbCol3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lCol4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ccbCol4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lCol5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ccbCol5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lCol6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ccbCol6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
