@@ -30,13 +30,13 @@ public final class PrefConstants {
     public static final String PREFKEY_COLOR_5 = "regex.color.5";
     public static final String PREFKEY_COLOR_6 = "regex.color.6";
     public static final String PREFKEY_COLOR_PREFIX = "regex.color.";
-    public static final int DEFAULT_COLOR_0 = (255 << 24) | (204 << 16) | (255 << 8) | 255;
-    public static final int DEFAULT_COLOR_1 = (255 << 24) | (255 << 16) | (204 << 8) | 255;
-    public static final int DEFAULT_COLOR_2 = (255 << 24) | (255 << 16) | (255 << 8) | 204;
-    public static final int DEFAULT_COLOR_3 = (255 << 24) | (255 << 16) | (204 << 8) | 204;
-    public static final int DEFAULT_COLOR_4 = (255 << 24) | (204 << 16) | (255 << 8) | 204;
-    public static final int DEFAULT_COLOR_5 = (255 << 24) | (204 << 16) | (204 << 8) | 255;
-    public static final int DEFAULT_COLOR_6 = (255 << 24) | (204 << 16) | (204 << 8) | 204;
+    public static final int DEFAULT_COLOR_0 = (255 << 24) | (230 << 16) | (230 << 8) | 230;
+    public static final int DEFAULT_COLOR_1 = (255 << 24) | (204 << 16) | (255 << 8) | 255;
+    public static final int DEFAULT_COLOR_2 = (255 << 24) | (255 << 16) | (204 << 8) | 255;
+    public static final int DEFAULT_COLOR_3 = (255 << 24) | (255 << 16) | (255 << 8) | 204;
+    public static final int DEFAULT_COLOR_4 = (255 << 24) | (255 << 16) | (204 << 8) | 204;
+    public static final int DEFAULT_COLOR_5 = (255 << 24) | (204 << 16) | (255 << 8) | 204;
+    public static final int DEFAULT_COLOR_6 = (255 << 24) | (204 << 16) | (204 << 8) | 255;
 
     // prevent instantiation
     private PrefConstants() {
