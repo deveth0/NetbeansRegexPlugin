@@ -21,6 +21,8 @@ import de.dev.eth0.netbeans.plugins.regex.prefs.PrefConstants;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
 import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
@@ -53,7 +55,6 @@ import org.openide.windows.TopComponent;
 )
 @TopComponent.Description(
         preferredID = "UiTopComponent",
-        //iconBase="SET/PATH/TO/ICON/HERE",
         persistenceType = TopComponent.PERSISTENCE_ALWAYS
 )
 @TopComponent.Registration(mode = "output", openAtStartup = false)
@@ -83,14 +84,14 @@ public final class UiTopComponent extends TopComponent {
     private final Color COL_SUCCESS;
     private final Color COL_ERROR;
     private final RegexEvaluator evaluator = new RegexEvaluator();
-    private DefaultComboBoxModel<String> dcbmRegExs = new DefaultComboBoxModel<>();
-    private Timer throttleUpdates = new Timer(THROTTLE_DELAY, new ActionListener() {
+    private final DefaultComboBoxModel<String> dcbmRegExs = new DefaultComboBoxModel<>();
+    private final Timer throttleUpdates = new Timer(THROTTLE_DELAY, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             updateRegexp();
         }
     });
-    private Timer throttleUpdateHighlight = new Timer(THROTTLE_DELAY, new ActionListener() {
+    private final Timer throttleUpdateHighlight = new Timer(THROTTLE_DELAY, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             updateRegexp();
@@ -129,6 +130,7 @@ public final class UiTopComponent extends TopComponent {
             throttleUpdateHighlight.restart();
         }
     };
+    private final Preferences prefs = NbPreferences.forModule(PrefConstants.class);
 
     public UiTopComponent() {
         initComponents();
@@ -394,6 +396,16 @@ public final class UiTopComponent extends TopComponent {
         tpText.getDocument().addDocumentListener(dlUpdate);
         // listen to replex edits
         txReplace.getDocument().addDocumentListener(dlUpdate);
+        // listen for preferences changes
+        prefs.addPreferenceChangeListener(new PreferenceChangeListener() {
+            @Override
+            public void preferenceChange(PreferenceChangeEvent evt) {
+                updateStyles(tpText);
+                updateStyles(tpGroups);
+                updateGroups();
+                updateHighlight();
+            }
+        });
     }
 
     @Override
@@ -439,7 +451,7 @@ public final class UiTopComponent extends TopComponent {
             txtDoc.setCharacterAttributes(group.start, group.end - group.start, tpText.getStyle("grp0"), true);
             for (int i = 1; i < evaluator.groups.length; i++) {
                 group = evaluator.groups[i];
-                String styleName = String.format("grp%d", 1 + (i % 6));
+                String styleName = String.format("grp%d", 1 + ((i - 1) % 6));
                 txtDoc.setCharacterAttributes(group.start, group.end - group.start, tpText.getStyle(styleName), true);
             }
         }
@@ -557,7 +569,6 @@ public final class UiTopComponent extends TopComponent {
     }
 
     private void addStyles(JTextPane tpText) {
-        final Preferences prefs = NbPreferences.forModule(PrefConstants.class);
         StyleConstants.setBackground(tpText.addStyle("grp0", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_0, PrefConstants.DEFAULT_COLOR_0)));
         StyleConstants.setBackground(tpText.addStyle("grp1", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_1, PrefConstants.DEFAULT_COLOR_1)));
         StyleConstants.setBackground(tpText.addStyle("grp2", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_2, PrefConstants.DEFAULT_COLOR_2)));
@@ -565,6 +576,16 @@ public final class UiTopComponent extends TopComponent {
         StyleConstants.setBackground(tpText.addStyle("grp4", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_4, PrefConstants.DEFAULT_COLOR_4)));
         StyleConstants.setBackground(tpText.addStyle("grp5", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_5, PrefConstants.DEFAULT_COLOR_5)));
         StyleConstants.setBackground(tpText.addStyle("grp6", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_6, PrefConstants.DEFAULT_COLOR_6)));
+    }
+
+    private void updateStyles(JTextPane tpText) {
+        StyleConstants.setBackground(tpText.getStyle("grp0"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_0, PrefConstants.DEFAULT_COLOR_0)));
+        StyleConstants.setBackground(tpText.getStyle("grp1"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_1, PrefConstants.DEFAULT_COLOR_1)));
+        StyleConstants.setBackground(tpText.getStyle("grp2"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_2, PrefConstants.DEFAULT_COLOR_2)));
+        StyleConstants.setBackground(tpText.getStyle("grp3"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_3, PrefConstants.DEFAULT_COLOR_3)));
+        StyleConstants.setBackground(tpText.getStyle("grp4"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_4, PrefConstants.DEFAULT_COLOR_4)));
+        StyleConstants.setBackground(tpText.getStyle("grp5"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_5, PrefConstants.DEFAULT_COLOR_5)));
+        StyleConstants.setBackground(tpText.getStyle("grp6"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_6, PrefConstants.DEFAULT_COLOR_6)));
     }
 
     private String firstLine(String str) {
