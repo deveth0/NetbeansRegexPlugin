@@ -518,11 +518,15 @@ public final class UiTopComponent extends TopComponent {
             txtDoc.setCharacterAttributes(group.start, group.end - group.start, tpText.getStyle("grp0"), true);
             for (int i = 1; i < evaluator.groups.length; i++) {
                 group = evaluator.groups[i];
-                String styleName = String.format("grp%d", 1 + ((i - 1) % 6));
+                String styleName = genStyleName(i);
                 txtDoc.setCharacterAttributes(group.start, group.end - group.start, tpText.getStyle(styleName), true);
             }
         }
         txtDoc.addDocumentListener(dlUpdate);
+    }
+
+    private String genStyleName(int i) {
+        return String.format("grp%d", 1 + ((i - 1) % 6));
     }
 
     private void updateRegexp() {
@@ -590,7 +594,7 @@ public final class UiTopComponent extends TopComponent {
             for (int i = 1; i < evaluator.groups.length; i++) {
                 try {
                     group = evaluator.groups[i];
-                    String styleName = String.format("grp%d", 1 + (i % 6));
+                    String styleName = genStyleName(i);
                     grpDoc.insertString(grpDoc.getLength(), String.format("%d [%d,%d]", i, group.start, group.end), tpGroups.getStyle(styleName));
                     grpDoc.insertString(grpDoc.getLength(), String.format(": %s", group.group), null);
                     if (i + 1 < evaluator.groups.length) {
