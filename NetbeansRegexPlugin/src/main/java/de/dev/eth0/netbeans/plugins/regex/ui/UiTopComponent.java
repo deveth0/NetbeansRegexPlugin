@@ -17,13 +17,10 @@
 package de.dev.eth0.netbeans.plugins.regex.ui;
 
 import de.dev.eth0.netbeans.plugins.regex.RegexEvaluator;
-import de.dev.eth0.netbeans.plugins.regex.prefs.PrefConstants;
+import de.dev.eth0.netbeans.plugins.regex.prefs.PrefsDialog;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
-import java.util.prefs.Preferences;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -40,8 +37,8 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
-import org.openide.util.NbPreferences;
 import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 /**
  * Top component for testing regular expressions.
@@ -84,6 +81,7 @@ public final class UiTopComponent extends TopComponent {
     private final Color COL_SUCCESS;
     private final Color COL_ERROR;
     private final RegexEvaluator evaluator = new RegexEvaluator();
+    private final PrefsDialog prefDialog = new PrefsDialog(WindowManager.getDefault().getMainWindow(), true);
     private final DefaultComboBoxModel<String> dcbmRegExs = new DefaultComboBoxModel<>();
     private final Timer throttleUpdates = new Timer(THROTTLE_DELAY, new ActionListener() {
         @Override
@@ -130,7 +128,6 @@ public final class UiTopComponent extends TopComponent {
             throttleUpdateHighlight.restart();
         }
     };
-    private final Preferences prefs = NbPreferences.forModule(PrefConstants.class);
 
     public UiTopComponent() {
         initComponents();
@@ -170,6 +167,11 @@ public final class UiTopComponent extends TopComponent {
         jTextArea3 = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
+        pmSettings = new javax.swing.JPopupMenu();
+        cmDotall = new javax.swing.JCheckBoxMenuItem();
+        cmMultiline = new javax.swing.JCheckBoxMenuItem();
+        cmCaseinsensitive = new javax.swing.JCheckBoxMenuItem();
+        cmLiteral = new javax.swing.JCheckBoxMenuItem();
         splitter = new javax.swing.JSplitPane();
         pMatch = new javax.swing.JPanel();
         lGroups = new javax.swing.JLabel();
@@ -182,6 +184,7 @@ public final class UiTopComponent extends TopComponent {
         tpGroups = new javax.swing.JTextPane();
         jScrollPane6 = new javax.swing.JScrollPane();
         tpText = new javax.swing.JTextPane();
+        bSettings = org.openide.awt.DropDownButtonFactory.createDropDownButton(org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.COG), pmSettings);
         pReplace = new javax.swing.JPanel();
         lReplace = new javax.swing.JLabel();
         txReplace = new javax.swing.JTextField();
@@ -199,6 +202,38 @@ public final class UiTopComponent extends TopComponent {
 
         jTextPane2.setPreferredSize(new java.awt.Dimension(100, 50));
         jScrollPane5.setViewportView(jTextPane2);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cmDotall, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.cmDotall.text")); // NOI18N
+        cmDotall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsChanged(evt);
+            }
+        });
+        pmSettings.add(cmDotall);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cmMultiline, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.cmMultiline.text")); // NOI18N
+        cmMultiline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsChanged(evt);
+            }
+        });
+        pmSettings.add(cmMultiline);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cmCaseinsensitive, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.cmCaseinsensitive.text")); // NOI18N
+        cmCaseinsensitive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsChanged(evt);
+            }
+        });
+        pmSettings.add(cmCaseinsensitive);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cmLiteral, org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.cmLiteral.text")); // NOI18N
+        cmLiteral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsChanged(evt);
+            }
+        });
+        pmSettings.add(cmLiteral);
 
         setMinimumSize(new java.awt.Dimension(600, 185));
         setLayout(new java.awt.BorderLayout());
@@ -241,6 +276,14 @@ public final class UiTopComponent extends TopComponent {
         tpText.setPreferredSize(new java.awt.Dimension(100, 50));
         jScrollPane6.setViewportView(tpText);
 
+        bSettings.setToolTipText(org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.bSettings.toolTipText")); // NOI18N
+        bSettings.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        bSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSettingsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pMatchLayout = new javax.swing.GroupLayout(pMatch);
         pMatch.setLayout(pMatchLayout);
         pMatchLayout.setHorizontalGroup(
@@ -253,23 +296,27 @@ public final class UiTopComponent extends TopComponent {
                     .addComponent(lGroups))
                 .addGap(11, 11, 11)
                 .addGroup(pMatchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6)
                     .addGroup(pMatchLayout.createSequentialGroup()
-                        .addComponent(cbRegex, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbRegex, 0, 158, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bSave))
-                    .addComponent(lStatusRegex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(bSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bSettings))
+                    .addComponent(jScrollPane6)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lStatusRegex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pMatchLayout.setVerticalGroup(
             pMatchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMatchLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pMatchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lRegex)
-                    .addComponent(cbRegex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bSave))
+                .addGroup(pMatchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pMatchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lRegex)
+                        .addComponent(cbRegex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bSave))
+                    .addComponent(bSettings))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lStatusRegex)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,7 +332,7 @@ public final class UiTopComponent extends TopComponent {
                 .addContainerGap())
         );
 
-        pMatchLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bSave, cbRegex});
+        pMatchLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bSave, bSettings, cbRegex});
 
         splitter.setLeftComponent(pMatch);
 
@@ -306,19 +353,15 @@ public final class UiTopComponent extends TopComponent {
         pReplaceLayout.setHorizontalGroup(
             pReplaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pReplaceLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pReplaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pReplaceLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pReplaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lReplaced)
-                            .addComponent(lReplace))
-                        .addGap(5, 5, 5)
-                        .addGroup(pReplaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
-                            .addComponent(txReplace)))
-                    .addGroup(pReplaceLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(lStatusReplex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lReplace)
+                    .addComponent(lReplaced))
+                .addGap(5, 5, 5)
+                .addGroup(pReplaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txReplace)
+                    .addComponent(lStatusReplex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pReplaceLayout.setVerticalGroup(
@@ -355,9 +398,39 @@ public final class UiTopComponent extends TopComponent {
         tf.setCaretPosition(tf.getText().length());
     }//GEN-LAST:event_cbRegexActionPerformed
 
+    private void settingsChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsChanged
+        prefDialog.setCaseInsensitive(cmCaseinsensitive.isSelected());
+        prefDialog.setDotall(cmDotall.isSelected());
+        prefDialog.setLiteral(cmLiteral.isSelected());
+        prefDialog.setMultiline(cmMultiline.isSelected());
+        // update must come after above
+        updateRegexp();
+        updateHighlight();
+    }//GEN-LAST:event_settingsChanged
+
+    private void bSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSettingsActionPerformed
+        prefDialog.pack();
+        prefDialog.setLocationRelativeTo(this);
+        prefDialog.setVisible(true);
+        cmCaseinsensitive.setSelected(prefDialog.isCaseInsensitive());
+        cmDotall.setSelected(prefDialog.isDotall());
+        cmLiteral.setSelected(prefDialog.isLiteral());
+        cmMultiline.setSelected(prefDialog.isMultiline());
+        // update must come after above
+        updateStyles(tpText);
+        updateStyles(tpGroups);
+        updateRegexp();
+        updateHighlight();
+    }//GEN-LAST:event_bSettingsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bSave;
+    private javax.swing.JButton bSettings;
     private javax.swing.JComboBox<String> cbRegex;
+    private javax.swing.JCheckBoxMenuItem cmCaseinsensitive;
+    private javax.swing.JCheckBoxMenuItem cmDotall;
+    private javax.swing.JCheckBoxMenuItem cmLiteral;
+    private javax.swing.JCheckBoxMenuItem cmMultiline;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -374,6 +447,7 @@ public final class UiTopComponent extends TopComponent {
     private javax.swing.JLabel lText;
     private javax.swing.JPanel pMatch;
     private javax.swing.JPanel pReplace;
+    private javax.swing.JPopupMenu pmSettings;
     private javax.swing.JSplitPane splitter;
     private javax.swing.JTextArea taReplaced;
     private javax.swing.JTextPane tpGroups;
@@ -386,6 +460,8 @@ public final class UiTopComponent extends TopComponent {
         throttleUpdates.setRepeats(false);
         throttleUpdateHighlight.setRepeats(false);
         // trigger an initial update (useful if state read from properties)
+        updateStyles(tpText);
+        updateStyles(tpGroups);
         updateRegexp();
         updateHighlight();
         // listen to regex edits
@@ -395,16 +471,6 @@ public final class UiTopComponent extends TopComponent {
         tpText.getDocument().addDocumentListener(dlUpdate);
         // listen to replex edits
         txReplace.getDocument().addDocumentListener(dlUpdate);
-        // listen for preferences changes
-        prefs.addPreferenceChangeListener(new PreferenceChangeListener() {
-            @Override
-            public void preferenceChange(PreferenceChangeEvent evt) {
-                updateStyles(tpText);
-                updateStyles(tpGroups);
-                updateGroups();
-                updateHighlight();
-            }
-        });
     }
 
     @Override
@@ -419,6 +485,7 @@ public final class UiTopComponent extends TopComponent {
             String regex = dcbmRegExs.getElementAt(i);
             p.setProperty(genHistKey(i), regex);
         }
+        prefDialog.writeProperties(p);
     }
 
     private String genHistKey(int i) {
@@ -436,6 +503,7 @@ public final class UiTopComponent extends TopComponent {
                 dcbmRegExs.addElement(p.getProperty(key));
             }
         }
+        prefDialog.readProperties(p);
     }
 
     private void updateHighlight() {
@@ -462,7 +530,7 @@ public final class UiTopComponent extends TopComponent {
         String regex = tf.getText();
         String replacement = txReplace.getText();
         String input = tpText.getText();
-        evaluator.update(regex, getFlags(), replacement, input);
+        evaluator.update(regex, prefDialog.getFlags(), replacement, input);
 
         if (!regex.isEmpty()) {
             if (evaluator.validRegex) {
@@ -535,56 +603,24 @@ public final class UiTopComponent extends TopComponent {
         }
     }
 
-    private int getFlags() {
-        int flags = 0;
-//    if (caseInsensitiveCheckBox.isSelected()) {
-//      flags |= Pattern.CASE_INSENSITIVE;
-//    }
-//    if (multilineCheckBox.isSelected()) {
-//      flags |= Pattern.MULTILINE;
-//    }
-//    if (dotAllCheckBox.isSelected()) {
-//      flags |= Pattern.DOTALL;
-//    }
-//    if (unicodeCaseCheckBox.isSelected()) {
-//      flags |= Pattern.UNICODE_CASE;
-//    }
-//    if (canonEqCheckBox.isSelected()) {
-//      flags |= Pattern.CANON_EQ;
-//    }
-//    if (unixLinesCheckBox.isSelected()) {
-//      flags |= Pattern.UNIX_LINES;
-//    }
-//    if (literalCheckBox.isSelected()) {
-//      flags |= Pattern.LITERAL;
-//    }
-//    if (commentsCheckBox.isSelected()) {
-//      flags |= Pattern.COMMENTS;
-//    }
-//    if (unicodeCharacterClassCheckBox.isSelected()) {
-//      flags |= Pattern.UNICODE_CHARACTER_CLASS;
-//    }
-        return flags;
-    }
-
     private void addStyles(JTextPane tpText) {
-        StyleConstants.setBackground(tpText.addStyle("grp0", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_0, PrefConstants.DEFAULT_COLOR_0)));
-        StyleConstants.setBackground(tpText.addStyle("grp1", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_1, PrefConstants.DEFAULT_COLOR_1)));
-        StyleConstants.setBackground(tpText.addStyle("grp2", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_2, PrefConstants.DEFAULT_COLOR_2)));
-        StyleConstants.setBackground(tpText.addStyle("grp3", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_3, PrefConstants.DEFAULT_COLOR_3)));
-        StyleConstants.setBackground(tpText.addStyle("grp4", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_4, PrefConstants.DEFAULT_COLOR_4)));
-        StyleConstants.setBackground(tpText.addStyle("grp5", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_5, PrefConstants.DEFAULT_COLOR_5)));
-        StyleConstants.setBackground(tpText.addStyle("grp6", null), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_6, PrefConstants.DEFAULT_COLOR_6)));
+        StyleConstants.setBackground(tpText.addStyle("grp0", null), prefDialog.getColor0());
+        StyleConstants.setBackground(tpText.addStyle("grp1", null), prefDialog.getColor1());
+        StyleConstants.setBackground(tpText.addStyle("grp2", null), prefDialog.getColor2());
+        StyleConstants.setBackground(tpText.addStyle("grp3", null), prefDialog.getColor3());
+        StyleConstants.setBackground(tpText.addStyle("grp4", null), prefDialog.getColor4());
+        StyleConstants.setBackground(tpText.addStyle("grp5", null), prefDialog.getColor5());
+        StyleConstants.setBackground(tpText.addStyle("grp6", null), prefDialog.getColor6());
     }
 
     private void updateStyles(JTextPane tpText) {
-        StyleConstants.setBackground(tpText.getStyle("grp0"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_0, PrefConstants.DEFAULT_COLOR_0)));
-        StyleConstants.setBackground(tpText.getStyle("grp1"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_1, PrefConstants.DEFAULT_COLOR_1)));
-        StyleConstants.setBackground(tpText.getStyle("grp2"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_2, PrefConstants.DEFAULT_COLOR_2)));
-        StyleConstants.setBackground(tpText.getStyle("grp3"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_3, PrefConstants.DEFAULT_COLOR_3)));
-        StyleConstants.setBackground(tpText.getStyle("grp4"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_4, PrefConstants.DEFAULT_COLOR_4)));
-        StyleConstants.setBackground(tpText.getStyle("grp5"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_5, PrefConstants.DEFAULT_COLOR_5)));
-        StyleConstants.setBackground(tpText.getStyle("grp6"), new Color(prefs.getInt(PrefConstants.PREFKEY_COLOR_6, PrefConstants.DEFAULT_COLOR_6)));
+        StyleConstants.setBackground(tpText.getStyle("grp0"), prefDialog.getColor0());
+        StyleConstants.setBackground(tpText.getStyle("grp1"), prefDialog.getColor1());
+        StyleConstants.setBackground(tpText.getStyle("grp2"), prefDialog.getColor2());
+        StyleConstants.setBackground(tpText.getStyle("grp3"), prefDialog.getColor3());
+        StyleConstants.setBackground(tpText.getStyle("grp4"), prefDialog.getColor4());
+        StyleConstants.setBackground(tpText.getStyle("grp5"), prefDialog.getColor5());
+        StyleConstants.setBackground(tpText.getStyle("grp6"), prefDialog.getColor6());
     }
 
     private String firstLine(String str) {
