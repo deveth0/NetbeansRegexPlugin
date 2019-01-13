@@ -22,9 +22,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -32,6 +34,8 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
+import org.kordamp.ikonli.fontawesome.FontAwesome;
+import org.kordamp.ikonli.swing.FontIcon;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -80,6 +84,8 @@ public final class UiTopComponent extends TopComponent {
     private final Color COL_NORMAL;
     private final Color COL_SUCCESS;
     private final Color COL_ERROR;
+    private final Icon saveIcon;
+    private final Icon cogIcon;
     private final RegexEvaluator evaluator = new RegexEvaluator();
     private final PrefsDialog prefDialog = new PrefsDialog(WindowManager.getDefault().getMainWindow(), true);
     private final DefaultComboBoxModel<String> dcbmRegExs = new DefaultComboBoxModel<>();
@@ -130,6 +136,8 @@ public final class UiTopComponent extends TopComponent {
     };
 
     public UiTopComponent() {
+        saveIcon = FontIcon.of(FontAwesome.SAVE, UIManager.getColor("Button.foreground"));
+        cogIcon = FontIcon.of(FontAwesome.COG, UIManager.getColor("Button.foreground"));
         initComponents();
         setName(Bundle.CTL_UiTopComponent());
         COL_NORMAL = lStatusRegex.getForeground();
@@ -184,7 +192,7 @@ public final class UiTopComponent extends TopComponent {
         tpGroups = new javax.swing.JTextPane();
         jScrollPane6 = new javax.swing.JScrollPane();
         tpText = new javax.swing.JTextPane();
-        bSettings = org.openide.awt.DropDownButtonFactory.createDropDownButton(org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.COG), pmSettings);
+        bSettings = org.openide.awt.DropDownButtonFactory.createDropDownButton(cogIcon, pmSettings);
         pReplace = new javax.swing.JPanel();
         lReplace = new javax.swing.JLabel();
         txReplace = new javax.swing.JTextField();
@@ -254,7 +262,7 @@ public final class UiTopComponent extends TopComponent {
             }
         });
 
-        bSave.setIcon(org.kordamp.ikonli.swing.FontIcon.of(org.kordamp.ikonli.fontawesome.FontAwesome.SAVE,javax.swing.UIManager.getColor("Button.foreground")));
+        bSave.setIcon(saveIcon);
         bSave.setToolTipText(org.openide.util.NbBundle.getMessage(UiTopComponent.class, "UiTopComponent.bSave.toolTipText")); // NOI18N
         bSave.setMargin(new java.awt.Insets(2, 2, 2, 2));
         bSave.addActionListener(new java.awt.event.ActionListener() {
