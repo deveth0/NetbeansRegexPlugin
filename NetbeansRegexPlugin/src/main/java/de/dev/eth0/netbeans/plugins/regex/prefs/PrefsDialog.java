@@ -22,13 +22,20 @@ public class PrefsDialog extends javax.swing.JDialog {
     private static final String PROPKEY_COLOR_4 = "regex.color.4";
     private static final String PROPKEY_COLOR_5 = "regex.color.5";
     private static final String PROPKEY_COLOR_6 = "regex.color.6";
-    private final Color COL_HGLGHT_DEFAULT_0 = new Color(230, 230, 230);
-    private final Color COL_HGLGHT_DEFAULT_1 = new Color(204, 255, 255);
-    private final Color COL_HGLGHT_DEFAULT_2 = new Color(255, 204, 255);
-    private final Color COL_HGLGHT_DEFAULT_3 = new Color(255, 255, 204);
-    private final Color COL_HGLGHT_DEFAULT_4 = new Color(255, 204, 204);
-    private final Color COL_HGLGHT_DEFAULT_5 = new Color(204, 255, 204);
-    private final Color COL_HGLGHT_DEFAULT_6 = new Color(204, 204, 255);
+    private final Color COL_HGLGHT_LIGHT_0 = new Color(230, 230, 230);
+    private final Color COL_HGLGHT_LIGHT_1 = new Color(204, 255, 255);
+    private final Color COL_HGLGHT_LIGHT_2 = new Color(255, 204, 255);
+    private final Color COL_HGLGHT_LIGHT_3 = new Color(255, 255, 204);
+    private final Color COL_HGLGHT_LIGHT_4 = new Color(255, 204, 204);
+    private final Color COL_HGLGHT_LIGHT_5 = new Color(204, 255, 204);
+    private final Color COL_HGLGHT_LIGHT_6 = new Color(204, 204, 255);
+    private final Color COL_HGLGHT_DARK_0 = new Color(102, 102, 102);
+    private final Color COL_HGLGHT_DARK_1 = new Color(43, 85, 85);
+    private final Color COL_HGLGHT_DARK_2 = new Color(85, 43, 85);
+    private final Color COL_HGLGHT_DARK_3 = new Color(85, 85, 43);
+    private final Color COL_HGLGHT_DARK_4 = new Color(85, 43, 43);
+    private final Color COL_HGLGHT_DARK_5 = new Color(43, 85, 43);
+    private final Color COL_HGLGHT_DARK_6 = new Color(43, 43, 85);
 
     /**
      * Creates new form PrefsDialog
@@ -36,13 +43,13 @@ public class PrefsDialog extends javax.swing.JDialog {
     public PrefsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ccbCol0.setSelectedColor(COL_HGLGHT_DEFAULT_0);
-        ccbCol1.setSelectedColor(COL_HGLGHT_DEFAULT_1);
-        ccbCol2.setSelectedColor(COL_HGLGHT_DEFAULT_2);
-        ccbCol3.setSelectedColor(COL_HGLGHT_DEFAULT_3);
-        ccbCol4.setSelectedColor(COL_HGLGHT_DEFAULT_4);
-        ccbCol5.setSelectedColor(COL_HGLGHT_DEFAULT_5);
-        ccbCol6.setSelectedColor(COL_HGLGHT_DEFAULT_6);
+        ccbCol0.setSelectedColor(COL_HGLGHT_LIGHT_0);
+        ccbCol1.setSelectedColor(COL_HGLGHT_LIGHT_1);
+        ccbCol2.setSelectedColor(COL_HGLGHT_LIGHT_2);
+        ccbCol3.setSelectedColor(COL_HGLGHT_LIGHT_3);
+        ccbCol4.setSelectedColor(COL_HGLGHT_LIGHT_4);
+        ccbCol5.setSelectedColor(COL_HGLGHT_LIGHT_5);
+        ccbCol6.setSelectedColor(COL_HGLGHT_LIGHT_6);
     }
 
     /**
@@ -80,6 +87,8 @@ public class PrefsDialog extends javax.swing.JDialog {
         chUnicodeClass = new javax.swing.JCheckBox();
         sep1 = new javax.swing.JSeparator();
         sep2 = new javax.swing.JSeparator();
+        bLight = new javax.swing.JButton();
+        bDark = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(org.openide.util.NbBundle.getMessage(PrefsDialog.class, "PrefsDialog.title")); // NOI18N
@@ -122,6 +131,20 @@ public class PrefsDialog extends javax.swing.JDialog {
 
         org.openide.awt.Mnemonics.setLocalizedText(chUnicodeClass, org.openide.util.NbBundle.getMessage(PrefsDialog.class, "PrefsDialog.chUnicodeClass.text")); // NOI18N
 
+        org.openide.awt.Mnemonics.setLocalizedText(bLight, org.openide.util.NbBundle.getMessage(PrefsDialog.class, "PrefsDialog.bLight.text")); // NOI18N
+        bLight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLightActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(bDark, org.openide.util.NbBundle.getMessage(PrefsDialog.class, "PrefsDialog.bDark.text")); // NOI18N
+        bDark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDarkActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,56 +153,67 @@ public class PrefsDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lHead2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sep1))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lHead1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sep2))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lCol4)
+                        .addComponent(lHead2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lCol5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lCol6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(sep1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lCol1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lCol2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lCol3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lHeading)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ccbCol0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chDotall)
-                            .addComponent(chCaseinsens)
-                            .addComponent(chMultiline))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chComments)
-                            .addComponent(chUnixLines)
-                            .addComponent(chLiteral))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chUnicodeCase)
-                            .addComponent(chUnicodeClass)
-                            .addComponent(chCanonical))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lCol4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lCol5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lCol6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lCol1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lCol2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lCol3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lHeading)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ccbCol0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chCanonical)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chDotall)
+                                    .addComponent(chCaseinsens))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chMultiline)
+                                    .addComponent(chLiteral))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chComments)
+                                    .addComponent(chUnixLines))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chUnicodeCase)
+                                    .addComponent(chUnicodeClass))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bLight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bDark)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -209,7 +243,11 @@ public class PrefsDialog extends javax.swing.JDialog {
                     .addComponent(ccbCol5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lCol6)
                     .addComponent(ccbCol6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bLight)
+                    .addComponent(bDark))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lHead2)
                     .addComponent(sep1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,25 +255,46 @@ public class PrefsDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chDotall)
                     .addComponent(chComments)
-                    .addComponent(chUnicodeCase))
+                    .addComponent(chUnicodeCase)
+                    .addComponent(chMultiline))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chCaseinsens)
                     .addComponent(chUnixLines)
-                    .addComponent(chUnicodeClass))
+                    .addComponent(chUnicodeClass)
+                    .addComponent(chLiteral))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chMultiline)
-                    .addComponent(chLiteral)
-                    .addComponent(chCanonical))
+                .addComponent(chCanonical)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLightActionPerformed
+        ccbCol0.setSelectedColor(COL_HGLGHT_LIGHT_0);
+        ccbCol1.setSelectedColor(COL_HGLGHT_LIGHT_1);
+        ccbCol2.setSelectedColor(COL_HGLGHT_LIGHT_2);
+        ccbCol3.setSelectedColor(COL_HGLGHT_LIGHT_3);
+        ccbCol4.setSelectedColor(COL_HGLGHT_LIGHT_4);
+        ccbCol5.setSelectedColor(COL_HGLGHT_LIGHT_5);
+        ccbCol6.setSelectedColor(COL_HGLGHT_LIGHT_6);
+    }//GEN-LAST:event_bLightActionPerformed
+
+    private void bDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDarkActionPerformed
+        ccbCol0.setSelectedColor(COL_HGLGHT_DARK_0);
+        ccbCol1.setSelectedColor(COL_HGLGHT_DARK_1);
+        ccbCol2.setSelectedColor(COL_HGLGHT_DARK_2);
+        ccbCol3.setSelectedColor(COL_HGLGHT_DARK_3);
+        ccbCol4.setSelectedColor(COL_HGLGHT_DARK_4);
+        ccbCol5.setSelectedColor(COL_HGLGHT_DARK_5);
+        ccbCol6.setSelectedColor(COL_HGLGHT_DARK_6);
+    }//GEN-LAST:event_bDarkActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bDark;
+    private javax.swing.JButton bLight;
     private org.openide.awt.ColorComboBox ccbCol0;
     private org.openide.awt.ColorComboBox ccbCol1;
     private org.openide.awt.ColorComboBox ccbCol2;
@@ -358,13 +417,13 @@ public class PrefsDialog extends javax.swing.JDialog {
     }
 
     public void readProperties(Properties prefs) {
-        ccbCol0.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_0, col2str(COL_HGLGHT_DEFAULT_0))));
-        ccbCol1.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_1, col2str(COL_HGLGHT_DEFAULT_1))));
-        ccbCol2.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_2, col2str(COL_HGLGHT_DEFAULT_2))));
-        ccbCol3.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_3, col2str(COL_HGLGHT_DEFAULT_3))));
-        ccbCol4.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_4, col2str(COL_HGLGHT_DEFAULT_4))));
-        ccbCol5.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_5, col2str(COL_HGLGHT_DEFAULT_5))));
-        ccbCol6.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_6, col2str(COL_HGLGHT_DEFAULT_6))));
+        ccbCol0.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_0, col2str(COL_HGLGHT_LIGHT_0))));
+        ccbCol1.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_1, col2str(COL_HGLGHT_LIGHT_1))));
+        ccbCol2.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_2, col2str(COL_HGLGHT_LIGHT_2))));
+        ccbCol3.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_3, col2str(COL_HGLGHT_LIGHT_3))));
+        ccbCol4.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_4, col2str(COL_HGLGHT_LIGHT_4))));
+        ccbCol5.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_5, col2str(COL_HGLGHT_LIGHT_5))));
+        ccbCol6.setSelectedColor(Color.decode(prefs.getProperty(PROPKEY_COLOR_6, col2str(COL_HGLGHT_LIGHT_6))));
     }
 
     public void writeProperties(Properties prefs) {
