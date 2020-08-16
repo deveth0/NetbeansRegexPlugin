@@ -115,6 +115,12 @@
             <artifactId>org-netbeans-modules-options-api</artifactId>
             <version>${netbeans.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>javax.annotation-api-1.2</artifactId>
+            <version>RELEASE74-BETA</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <repositories>
